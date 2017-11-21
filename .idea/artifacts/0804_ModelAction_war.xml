@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="0804-ModelAction:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="Day13-SSH-0804.war">
+      <element id="artifact" artifact-name="0804-ModelAction:war exploded" />
+    </root>
+  </artifact>
+</component>
