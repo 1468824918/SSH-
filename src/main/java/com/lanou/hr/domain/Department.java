@@ -12,7 +12,6 @@ public class Department {
     private Set<Post> posts = new HashSet<>();
 
 
-
     public Department(String depID, String depName) {
         this.depID = depID;
         this.depName = depName;

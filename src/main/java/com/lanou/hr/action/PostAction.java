@@ -21,7 +21,7 @@ import java.util.List;
  */
 //@Controller("postAction")
 @Scope("prototype")
-public class PostAction extends BaseAction<Post,PostServiceImpl> {
+public class PostAction extends BaseAction<Post, PostServiceImpl> {
 
     private Department department = new Department();
     private String depID;
@@ -35,7 +35,7 @@ public class PostAction extends BaseAction<Post,PostServiceImpl> {
      * @return
      */
     public String addSavePost() {
-        getModel().setDepartment(new Department(depID,depName));
+        getModel().setDepartment(new Department(depID, depName));
         service.addSavePost(getModel());
 
         return SUCCESS;
@@ -54,32 +54,33 @@ public class PostAction extends BaseAction<Post,PostServiceImpl> {
 
     /**
      * 查询所有部门
+     *
      * @return
      */
-    public String findDepartment(){
+    public String findDepartment() {
         departmentList = service.findDepartment();
         return SUCCESS;
     }
 
 
     private int pageNum;
-    private int pageSize=5;
+    private int pageSize = 5;
 
 
     /**
      * 分页
+     *
      * @return
      */
     @SkipValidation
-    public String findPostByPage(){
-        if (pageNum==0){
-            pageNum=1;
+    public String findPostByPage() {
+        if (pageNum == 0) {
+            pageNum = 1;
         }
-        PageBean<Post> all = service.findPostByPage(getModel(),pageNum,pageSize);
-        ActionContext.getContext().getSession().put("pageBean",all);
+        PageBean<Post> all = service.findPostByPage(getModel(), pageNum, pageSize);
+        ActionContext.getContext().getSession().put("pageBean", all);
         return SUCCESS;
     }
-
 
 
     public List<Post> getPosts() {

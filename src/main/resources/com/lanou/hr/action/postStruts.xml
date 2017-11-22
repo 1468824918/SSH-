@@ -31,7 +31,7 @@
         <action name="editPost"
                 class="postAction"
                 method="findDepartment">
-            <result name="success" >/pages/post/addOrEditPost.jsp</result>
+            <result name="success">/pages/post/addOrEditPost.jsp</result>
         </action>
 
 

@@ -3,6 +3,7 @@ package com.lanou.hr.dao;
 import com.lanou.hr.domain.Department;
 import com.lanou.hr.domain.Post;
 import com.lanou.hr.domain.Staff;
+
 import java.util.List;
 
 /**
@@ -10,24 +11,24 @@ import java.util.List;
  */
 public interface StaffDao {
 
-     Staff login(String loginName, String loginPwd);
+    Staff login(String loginName, String loginPwd);
 
-     List<Staff> find(Staff staff);
+    List<Staff> find(Staff staff);
 
-     List<Department> staffFindDepartment();
+    List<Department> staffFindDepartment();
 
-     List<Post> findPost(String depID);
+    List<Post> findPost(String depID);
 
-     List<Staff> findPostPostIdAndDepID(String postId, String depID, String staffName);
+    List<Staff> findPostPostIdAndDepID(String postId, String depID, String staffName);
 
-     void saveStaff(Staff staff);
+    void saveStaff(Staff staff);
 
-     void updateStaff(Staff staff);
+    void updateStaff(Staff staff);
 
     void updateStaffLoginPwd(Staff staff, String reNewPassword);
 
-     //分页
-     int getTotalStaff();
+    //分页
+    int getTotalStaff();
 
-     List<Staff> findStaffByPage(int startIndex, int pageSize);
+    List<Staff> findStaffByPage(int startIndex, int pageSize);
 }

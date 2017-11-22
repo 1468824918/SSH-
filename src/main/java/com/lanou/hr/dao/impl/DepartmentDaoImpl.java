@@ -34,7 +34,7 @@ public class DepartmentDaoImpl extends HibernateDaoSupport implements Department
     public void addOrEditPre(Department department) {
         if (department.getDepID().equals("")) {
             getHibernateTemplate().save(department);
-        }else {
+        } else {
             getHibernateTemplate().saveOrUpdate(department);
         }
     }
@@ -42,13 +42,14 @@ public class DepartmentDaoImpl extends HibernateDaoSupport implements Department
 
     /**
      * 分页
+     *
      * @return
      */
     @Override
     public int getTotalDepartment() {
         String sql = "select count(d) from Department d where 1=1";
         List<Long> find = (List<Long>) getHibernateTemplate().find(sql);
-        if (find!=null){
+        if (find != null) {
             return find.get(0).intValue();
         }
         return 0;
@@ -58,6 +59,6 @@ public class DepartmentDaoImpl extends HibernateDaoSupport implements Department
     @Override
     public List<Department> findDepartmentByPage(int startIndex, int pageSize) {
         String sql = "from Department where 1=1";
-        return getHibernateTemplate().execute(new PageHibernateCallback<Department>(sql,startIndex,pageSize));
+        return getHibernateTemplate().execute(new PageHibernateCallback<Department>(sql, startIndex, pageSize));
     }
 }

@@ -65,8 +65,6 @@
     </bean>
 
 
-
-
     <bean id="departmentAction" class="com.lanou.hr.action.DepartmentAction">
         <property name="service" ref="departmentService"/>
     </bean>

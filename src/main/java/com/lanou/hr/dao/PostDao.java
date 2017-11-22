@@ -1,6 +1,8 @@
 package com.lanou.hr.dao;
+
 import com.lanou.hr.domain.Department;
 import com.lanou.hr.domain.Post;
+
 import java.util.List;
 
 /**

@@ -11,6 +11,7 @@ import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.springframework.context.annotation.Scope;
 import util.CrmStringUtils;
 import util.PageBean;
+
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ import java.util.List;
  */
 //@Controller("staffAction")
 @Scope("prototype")
-public class StaffAction extends BaseAction<Staff,StaffServiceImpl> {
+public class StaffAction extends BaseAction<Staff, StaffServiceImpl> {
     private Post post = new Post();
     private String depID;
     private String postId;
@@ -34,6 +35,7 @@ public class StaffAction extends BaseAction<Staff,StaffServiceImpl> {
 
     /**
      * 员工登录
+     *
      * @return
      */
     public String login() {
@@ -49,6 +51,7 @@ public class StaffAction extends BaseAction<Staff,StaffServiceImpl> {
 
     /**
      * 登录拦截
+     *
      * @return
      */
     @SkipValidation
@@ -58,6 +61,7 @@ public class StaffAction extends BaseAction<Staff,StaffServiceImpl> {
 
     /**
      * 查询所有员工部门
+     *
      * @return
      */
     @SkipValidation
@@ -68,6 +72,7 @@ public class StaffAction extends BaseAction<Staff,StaffServiceImpl> {
 
     /**
      * 查询员工的职位
+     *
      * @return
      */
     @SkipValidation
@@ -79,6 +84,7 @@ public class StaffAction extends BaseAction<Staff,StaffServiceImpl> {
     /**
      * 高级查询
      * 根据 postId  depID 查询员工
+     *
      * @return
      */
     @SkipValidation
@@ -92,6 +98,7 @@ public class StaffAction extends BaseAction<Staff,StaffServiceImpl> {
     /**
      * 添加
      * 员工的表单数据
+     *
      * @param
      */
     @SkipValidation
@@ -105,6 +112,7 @@ public class StaffAction extends BaseAction<Staff,StaffServiceImpl> {
     /**
      * 编辑
      * 修改员工信息
+     *
      * @return
      */
     @SkipValidation
@@ -117,12 +125,13 @@ public class StaffAction extends BaseAction<Staff,StaffServiceImpl> {
 
     /**
      * 修改密码
+     *
      * @return
      */
     @SkipValidation
     public String updatePassword() {
         Staff staff1 = (Staff) ServletActionContext.getRequest().getSession().getAttribute("staff");
-        if (!(staff1.getLoginPwd().equals(oldPassword))||!newPassword.equals(reNewPassword)) {
+        if (!(staff1.getLoginPwd().equals(oldPassword)) || !newPassword.equals(reNewPassword)) {
             addActionError("密码输入错误");
             return ERROR;
         } else {
@@ -134,10 +143,11 @@ public class StaffAction extends BaseAction<Staff,StaffServiceImpl> {
 
     /**
      * 重新登录
+     *
      * @return
      */
     @SkipValidation
-    public String againLogin(){
+    public String againLogin() {
 //        ActionContext.getContext().getSession().remove("staff");
         ActionContext.getContext().getSession().clear();
         return SUCCESS;
@@ -145,20 +155,21 @@ public class StaffAction extends BaseAction<Staff,StaffServiceImpl> {
 
 
     private int pageNum;
-    private int pageSize=5;
+    private int pageSize = 5;
 
 
     /**
      * 分页
+     *
      * @return
      */
     @SkipValidation
-    public String findStaffByPage(){
-        if (pageNum==0){
-            pageNum=1;
+    public String findStaffByPage() {
+        if (pageNum == 0) {
+            pageNum = 1;
         }
-        PageBean<Staff> all = service.findStaffByPage(getModel(),pageNum,pageSize);
-        ActionContext.getContext().getSession().put("pageBean",all);
+        PageBean<Staff> all = service.findStaffByPage(getModel(), pageNum, pageSize);
+        ActionContext.getContext().getSession().put("pageBean", all);
         return SUCCESS;
     }
 

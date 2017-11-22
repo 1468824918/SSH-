@@ -19,14 +19,13 @@ public class StaffDaoImpl extends HibernateDaoSupport implements StaffDao {
      * 员工的登录
      */
     @Override
-    public Staff login(String loginName,String loginPwd) {
-        List<Staff> staffs = (List<Staff>) getHibernateTemplate().find("from Staff staffs where staffs.loginName=? and staffs.loginPwd=?",loginName,loginPwd);
-        if (staffs.size()>0){
+    public Staff login(String loginName, String loginPwd) {
+        List<Staff> staffs = (List<Staff>) getHibernateTemplate().find("from Staff staffs where staffs.loginName=? and staffs.loginPwd=?", loginName, loginPwd);
+        if (staffs.size() > 0) {
             return staffs.get(0);
         }
         return null;
     }
-
 
 
     /**
@@ -41,8 +40,6 @@ public class StaffDaoImpl extends HibernateDaoSupport implements StaffDao {
     }
 
 
-
-
     /**
      * 查找员工所有部门
      *
@@ -52,7 +49,6 @@ public class StaffDaoImpl extends HibernateDaoSupport implements StaffDao {
     public List<Department> staffFindDepartment() {
         return (List<Department>) getHibernateTemplate().find("from Department dept");
     }
-
 
 
     /**
@@ -67,10 +63,10 @@ public class StaffDaoImpl extends HibernateDaoSupport implements StaffDao {
     }
 
 
-
     /**
      * 根据 postId  depID staffName 查询数据
      * 高级查询
+     *
      * @param postId
      * @param depID
      * @return
@@ -78,14 +74,13 @@ public class StaffDaoImpl extends HibernateDaoSupport implements StaffDao {
     @Override
     public List<Staff> findPostPostIdAndDepID(String postId, String depID, String staffName) {
 
-        if (postId==null && depID==null && staffName==null){
+        if (postId == null && depID == null && staffName == null) {
             return (List<Staff>) getHibernateTemplate().find("from Staff staff");
-        }
-        else if (postId==null && !"".equals(depID) && !"".equals(staffName)){
+        } else if (postId == null && !"".equals(depID) && !"".equals(staffName)) {
             return (List<Staff>) getHibernateTemplate().find("from Staff staff");
         }
         //条件全部为空
-         if ("".equals(postId) && "".equals(depID) && "".equals(staffName)) {
+        if ("".equals(postId) && "".equals(depID) && "".equals(staffName)) {
             return (List<Staff>) getHibernateTemplate().find("from Staff staffs");
         }
         //部门depID和职务postId不为空且staffName为空
@@ -97,11 +92,11 @@ public class StaffDaoImpl extends HibernateDaoSupport implements StaffDao {
             return (List<Staff>) getHibernateTemplate().find("from Staff staff where post.department.depID=?", depID);
         }
         //部门depID和职务postId为空staffName不为空
-        else if ("".equals(postId) && "".equals(depID) && !"".equals(staffName)){
-            return (List<Staff>) getHibernateTemplate().find("from Staff staff where staffName like ?","%"+ staffName+ "%");
+        else if ("".equals(postId) && "".equals(depID) && !"".equals(staffName)) {
+            return (List<Staff>) getHibernateTemplate().find("from Staff staff where staffName like ?", "%" + staffName + "%");
         }
         //条件全有
-            return (List<Staff>) getHibernateTemplate().find("from Staff staff where post.postId=?and post.department.depID=? and staffName=?", postId, depID, staffName);
+        return (List<Staff>) getHibernateTemplate().find("from Staff staff where post.postId=?and post.department.depID=? and staffName=?", postId, depID, staffName);
     }
 
 
@@ -116,7 +111,6 @@ public class StaffDaoImpl extends HibernateDaoSupport implements StaffDao {
     }
 
 
-
     /**
      * 修改员工信息
      *
@@ -128,15 +122,15 @@ public class StaffDaoImpl extends HibernateDaoSupport implements StaffDao {
     }
 
 
-
     /**
      * 修改密码
+     *
      * @param staff
      */
     @Override
-    public void updateStaffLoginPwd(Staff staff,String reNewPassword) {
-        List<Staff> staffList = (List<Staff>) getHibernateTemplate().find("from Staff staff where staff.loginName=?",staff.getLoginName());
-        if (staffList.size()>0){
+    public void updateStaffLoginPwd(Staff staff, String reNewPassword) {
+        List<Staff> staffList = (List<Staff>) getHibernateTemplate().find("from Staff staff where staff.loginName=?", staff.getLoginName());
+        if (staffList.size() > 0) {
             Staff staff1 = staffList.get(0);
             staff1.setLoginPwd(reNewPassword);
             getHibernateTemplate().update(staff1);
@@ -144,14 +138,12 @@ public class StaffDaoImpl extends HibernateDaoSupport implements StaffDao {
     }
 
 
-
-
     //分页
     @Override
     public int getTotalStaff() {
         String sql = "select count(s) from Staff s where 1=1";
         List<Long> find = (List<Long>) getHibernateTemplate().find(sql);
-        if (find!=null){
+        if (find != null) {
             return find.get(0).intValue();
         }
         return 0;
@@ -161,6 +153,6 @@ public class StaffDaoImpl extends HibernateDaoSupport implements StaffDao {
     @Override
     public List<Staff> findStaffByPage(int startIndex, int pageSize) {
         String sql = "from Staff where 1=1";
-        return getHibernateTemplate().execute(new PageHibernateCallback<Staff>(sql,startIndex,pageSize));
+        return getHibernateTemplate().execute(new PageHibernateCallback<Staff>(sql, startIndex, pageSize));
     }
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+
+    <!--查询所有部门-->
+    <package name="department" extends="Interceptor">
+        <action name="department"
+                class="departmentAction"
+                method="findAll">
+            <result name="success">/pages/department/listDepartment.jsp</result>
+        </action>
+
+
+        <!--插入部门-->
+        <action name="addOrEditPre"
+                class="departmentAction"
+                method="addOrEditPre">
+            <result name="success" type="redirectAction">findDepartmentByPage</result>
+            <result name="error">/pages/department/addOrEditDepartment.jsp</result>
+        </action>
+
+
+        <!--转到jsp中-->
+        <action name="action"
+                class="departmentAction">
+            <result name="success">/pages/department/addOrEditDepartment.jsp</result>
+        </action>
+
+        <action name="findDepartmentByPage"
+                class="departmentAction"
+                method="findDepartmentByPage">
+            <result name="success">/pages/department/listDepartment.jsp</result>
+        </action>
+
+    </package>
+</struts>

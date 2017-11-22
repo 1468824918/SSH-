@@ -13,18 +13,19 @@ import java.util.List;
  * Created by dllo on 17/11/10.
  */
 @Repository("postDao")
-public class PostDaoImpl extends HibernateDaoSupport implements PostDao{
+public class PostDaoImpl extends HibernateDaoSupport implements PostDao {
 
 
     /**
      * 职务管理(插入职务)
+     *
      * @param post
      */
     @Override
     public void addSavePost(Post post) {
-        if ("".equals(post.getPostId())){
+        if ("".equals(post.getPostId())) {
             getHibernateTemplate().save(post);
-        }else {
+        } else {
             getHibernateTemplate().saveOrUpdate(post);
         }
     }
@@ -39,6 +40,7 @@ public class PostDaoImpl extends HibernateDaoSupport implements PostDao{
 
     /**
      * 查询所有部门
+     *
      * @return
      */
     @Override
@@ -48,13 +50,14 @@ public class PostDaoImpl extends HibernateDaoSupport implements PostDao{
 
     /**
      * 分页
+     *
      * @return
      */
     @Override
     public int getTotalPost() {
         String sql = "select count(p) from Post p where 1=1";
         List<Long> find = (List<Long>) getHibernateTemplate().find(sql);
-        if (find!=null){
+        if (find != null) {
             return find.get(0).intValue();
         }
         return 0;
@@ -63,7 +66,7 @@ public class PostDaoImpl extends HibernateDaoSupport implements PostDao{
     @Override
     public List<Post> findPostByPage(int startIndex, int pageSize) {
         String sql = "from Post where 1=1";
-        return getHibernateTemplate().execute(new PageHibernateCallback<Post>(sql,startIndex,pageSize));
+        return getHibernateTemplate().execute(new PageHibernateCallback<Post>(sql, startIndex, pageSize));
     }
 
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.lanou.del.domain.Clazz" table="crm_course_type">
+        <id name="classId">
+            <generator class="uuid"/>
+        </id>
+        <property name="className"/>
+        <property name="studentName"/>
+        <property name="company"/>
+        <property name="pay"/>
+        <property name="post"/>
+        <property name="onDutyDate"/>
+        <property name="describe"/>
+    </class>
+</hibernate-mapping>
